@@ -20,10 +20,11 @@ export default class ChatMessage extends Vue {
 
 <style lang="scss" scoped>
 .chat-container {
-  width: 75%;
+  max-width: 75%;
   border-radius: 15px;
   p {
-    text-align: center;
+    text-align: start;
+    margin-left: 2%;
   }
 }
 .sender-chat {

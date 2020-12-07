@@ -1,5 +1,5 @@
 <template>
-  <form class="chat-input-wrapper input-group fixed-bottom">
+  <form class="chat-input-wrapper input-group fixed-bottom container">
     <input
       type="text"
       class="form-control"

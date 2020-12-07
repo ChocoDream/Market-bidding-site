@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container chat-page">
     <div class="chat-header row sticky-top">
       <div class="back-arrow col-2">
         <button @click="goBack">
@@ -29,7 +29,7 @@
       :style="!content.sender ? 'justify-content: flex-end' : ''"
       :key="content.message + '' + i"
     >
-      <ChatMessageItem :content="content" />
+      <ChatMessage :content="content" />
     </div>
     <ChatInput />
   </div>
@@ -38,11 +38,11 @@
 <script>
 import { Vue, Component } from "vue-property-decorator";
 import ChatInput from "../components/chat-page/ChatInput";
-import ChatMessageItem from "../components/chat-page//ChatMessageItem";
+import ChatMessage from "../components/chat-page//ChatMessage";
 @Component({
   components: {
     ChatInput,
-    ChatMessageItem,
+    ChatMessage,
   },
 })
 export default class Chat extends Vue {
@@ -50,6 +50,7 @@ export default class Chat extends Vue {
     this.$router.go(-1);
   }
 
+//JUST TEST DATA TO HAVE SOMETHING TO USE WHEN STYLING COMPONENTS
   chatContent = [
     {
       message:
@@ -112,6 +113,10 @@ export default class Chat extends Vue {
 </script>
 
 <style lang="scss" scoped>
+.chat-page{
+  margin-bottom: 20vh;
+}
+
 .divider {
   width: calc(100% - 30px);
   margin: 0 15px;
@@ -156,7 +161,4 @@ export default class Chat extends Vue {
   margin-top: 2%;
 }
 
-.container {
-  margin-bottom: 20vh;
-}
 </style>
