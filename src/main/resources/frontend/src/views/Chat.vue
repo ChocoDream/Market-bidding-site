@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="chat-header row">
+    <div class="chat-header row sticky-top">
       <div class="back-arrow col-2">
         <button @click="goBack">
           <svg
@@ -25,7 +25,7 @@
 
     <!--CHAT STUFF-->
     <div
-      class="chat-wrapper"
+      class="chat-message-wrapper"
       v-for="(content, i) in chatContent"
       :style="!content.sender ? 'justify-content: flex-end' : ''"
       :key="content.message + '' + i"
@@ -37,6 +37,11 @@
         <p>{{ content.message }}</p>
       </div>
     </div>
+    <!--CHAT INPUT-->
+    <form class="chat-input-wrapper">
+      <input>
+      <button type="submit" id="sendMessage"></button>
+    </form>
   </div>
 </template>
 
@@ -50,6 +55,34 @@ export default class Chat extends Vue {
 
   chatContent = [
     {
+      message:
+        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: false,
+    },
+    {
+      message:
+        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: false,
+    },
+    {
+      message: "HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: true,
+    },
+    {
+      message:
+        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: true,
+    },
+    {
+      message:
+        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: false,
+    },
+    {
+      message: "HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: true,
+    },
+        {
       message:
         "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
       sender: false,
@@ -96,6 +129,7 @@ export default class Chat extends Vue {
   align-items: center;
   height: 40px;
   margin-bottom: 20px;
+  background-color: white;
   .back-arrow {
     display: flex;
     justify-content: flex-start;
@@ -120,7 +154,7 @@ export default class Chat extends Vue {
   }
 }
 
-.chat-wrapper {
+.chat-message-wrapper {
   display: flex;
   margin-top: 2%;
   .chat-container {
