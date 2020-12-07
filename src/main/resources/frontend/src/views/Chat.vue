@@ -23,42 +23,28 @@
       <div class="divider"></div>
     </div>
 
-    <!--CHAT STUFF-->
     <div
       class="chat-message-wrapper"
       v-for="(content, i) in chatContent"
       :style="!content.sender ? 'justify-content: flex-end' : ''"
       :key="content.message + '' + i"
     >
-      <div
-        class="chat-container"
-        :class="content.sender ? 'sender-chat' : 'reciever-chat'"
-      >
-        <p>{{ content.message }}</p>
-      </div>
+      <ChatMessageItem :content="content" />
     </div>
-    <!--CHAT INPUT-->
-    <form class="chat-input-wrapper input-group fixed-bottom">
-      <input
-        type="text"
-        class="form-control"
-        id="input-field"
-        aria-label="Inputfield for user"
-        aria-describedby="basic-addon2"
-        required
-      />
-      <div class="input-group-append">
-        <button type="submit" class="btn btn-primary material-icons" id="sendMessage">
-          send
-        </button>
-      </div>
-    </form>
+    <ChatInput />
   </div>
 </template>
 
 <script>
 import { Vue, Component } from "vue-property-decorator";
-@Component()
+import ChatInput from "../components/chat-page/ChatInput";
+import ChatMessageItem from "../components/chat-page//ChatMessageItem";
+@Component({
+  components: {
+    ChatInput,
+    ChatMessageItem,
+  },
+})
 export default class Chat extends Vue {
   goBack() {
     this.$router.go(-1);
@@ -168,27 +154,6 @@ export default class Chat extends Vue {
 .chat-message-wrapper {
   display: flex;
   margin-top: 2%;
-  .chat-container {
-    width: 75%;
-    border-radius: 15px;
-    p {
-      text-align: center;
-    }
-  }
-  .sender-chat {
-    background-color: #288781;
-  }
-  .reciever-chat {
-    background-color: lightgrey;
-  }
-}
-
-.chat-input-wrapper {
-  display: flex;
-  background-color: white;
-  .input-group-append{
-    margin-bottom: 1%;
-  }
 }
 
 .container {
