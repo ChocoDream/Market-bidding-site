@@ -8,6 +8,8 @@ import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 @Service
@@ -16,6 +18,7 @@ public class SocketService {
   ObjectMapper objectMapper = new ObjectMapper();
 
   private List<WebSocketSession> sessions = new CopyOnWriteArrayList<>();
+  private Map<String, WebSocketSession> loggedInSessions = new ConcurrentHashMap<>();
 
   // The two following methods "prepares" the message/payload, checks if the object that is being sent with
   // it is valid and can be stringyfied.
@@ -54,9 +57,15 @@ public class SocketService {
 
   public void addSession(WebSocketSession session) {
     sessions.add(session);
+
   }
 
   public void removeSession(WebSocketSession session) {
     sessions.remove(session);
+    loggedInSessions.values().remove(session);
+  }
+
+  public void addToLoggedInSessions(String key, WebSocketSession session) {
+    loggedInSessions.put(key, session);
   }
 }

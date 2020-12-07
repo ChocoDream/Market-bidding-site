@@ -67,12 +67,16 @@ export default new Vuex.Store({
       }
     },
 
-    async whoami({ commit }) {
+    async whoami(store) {
       let user = await fetch("/auth/whoami");
       try {
         user = await user.json();
-        // console.log(user);
-        commit("setloggedInUser", user);
+        store.commit("setloggedInUser", user);
+        const message = JSON.stringify({
+          action: "loggedIn",
+          payload: user.username,
+        });
+        store.state.websocket.send(message);
       } catch {
         console.log("Not authenticated");
       }
