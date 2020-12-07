@@ -112,8 +112,7 @@ export default class Chat extends Vue {
   }
 
   .chat-title {
-    font-size: 18px;
-    font-style: italic;
+    font-size: 22px;
     text-align: end;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -132,10 +131,10 @@ export default class Chat extends Vue {
     }
   }
   .sender-chat {
-    background-color: red;
+    background-color: #288781;
   }
   .reciever-chat {
-    background-color: green;
+    background-color: lightgrey;
   }
 }
 </style>
