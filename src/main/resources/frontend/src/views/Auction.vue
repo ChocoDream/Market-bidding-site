@@ -63,7 +63,7 @@
             <i class="material-icons align-middle" aria-hidden="true">mail</i>
             {{ auction.auctionOwner.email }}
           </p>
-          <p>{{ auction.auctionOwner.username }}</p>
+          <router-link class="btn btn-primary" tag="button" to="/chat/1">Chat with {{auction.auctionOwner.username}}</router-link>
         </div>
       </div>
     </div>
