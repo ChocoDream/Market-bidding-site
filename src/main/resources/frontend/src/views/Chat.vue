@@ -38,9 +38,20 @@
       </div>
     </div>
     <!--CHAT INPUT-->
-    <form class="chat-input-wrapper">
-      <input>
-      <button type="submit" id="sendMessage"></button>
+    <form class="chat-input-wrapper input-group fixed-bottom">
+      <input
+        type="text"
+        class="form-control"
+        id="input-field"
+        aria-label="Inputfield for user"
+        aria-describedby="basic-addon2"
+        required
+      />
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-primary material-icons" id="sendMessage">
+          send
+        </button>
+      </div>
     </form>
   </div>
 </template>
@@ -82,7 +93,7 @@ export default class Chat extends Vue {
       message: "HELLO WORLD HELLO WORLD HELLO WORLD",
       sender: true,
     },
-        {
+    {
       message:
         "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
       sender: false,
@@ -170,5 +181,17 @@ export default class Chat extends Vue {
   .reciever-chat {
     background-color: lightgrey;
   }
+}
+
+.chat-input-wrapper {
+  display: flex;
+  background-color: white;
+  .input-group-append{
+    margin-bottom: 1%;
+  }
+}
+
+.container {
+  margin-bottom: 20vh;
 }
 </style>
