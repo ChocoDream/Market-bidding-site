@@ -6,6 +6,8 @@ import Register from "../views/Register.vue";
 import Auction from "../views/Auction.vue";
 import CreateAuction from "../views/CreateAuction.vue";
 import Chat from "../views/Chat.vue";
+import ChatWindow from "../components/chat-page/ChatWindow";
+import ChatList from "../components/chat-page/ChatList";
 
 Vue.use(VueRouter);
 
@@ -36,10 +38,20 @@ const routes = [
     component: CreateAuction,
   },
   {
-    path: "/chat/:id",
+    path: "/chat",
     name: "Chat",
-    component: Chat
-  }
+    component: Chat,
+    children: [
+      {
+        path: ":id",
+        component: ChatWindow,
+      },
+      {
+        path: "",
+        component: ChatList,
+      },
+    ],
+  },
 ];
 
 const router = new VueRouter({

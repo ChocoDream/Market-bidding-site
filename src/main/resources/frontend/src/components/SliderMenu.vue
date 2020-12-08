@@ -32,6 +32,7 @@ export default class SliderMenu extends Vue {
     },
     { title: "Register", route: "/register", userStatus: ["offline"] },
     { title: "Home", route: "/", userStatus: ["offline", "online"] },
+    { title: "Chat", route: "/chat", userStatus: ["online"] },
   ];
 
   get menuItems() {
@@ -86,7 +87,7 @@ export default class SliderMenu extends Vue {
 
 <style lang="scss" scoped>
 .slider-menu {
-  z-index: 10;
+  z-index: 100;
   background: white;
   height: 100vh;
   width: 43vw;

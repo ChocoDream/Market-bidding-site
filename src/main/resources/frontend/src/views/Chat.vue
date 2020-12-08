@@ -1,6 +1,6 @@
 <template>
   <div class="container chat-page">
-    <div class="chat-header row sticky-top">
+    <div class="chat-header row">
       <div class="back-arrow col-2">
         <button @click="goBack">
           <svg
@@ -18,40 +18,33 @@
         </button>
       </div>
       <h2 class="chat-title col-10">
-        Stalin
+        Chats
       </h2>
       <div class="divider"></div>
     </div>
-
-    <div
-      class="chat-message-wrapper"
-      v-for="message of chatContent"
-      :style="!userIsSender(message) ? 'justify-content: flex-end' : ''"
-      :key="message.id"
-    >
-      <ChatMessage :userIsSender="!userIsSender(message)" :message="message" />
-    </div>
-    <ChatInput :recipientId="recipientId" />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import { Vue, Component } from "vue-property-decorator";
-import ChatInput from "../components/chat-page/ChatInput";
-import ChatMessage from "../components/chat-page//ChatMessage";
-@Component({
-  components: {
-    ChatInput,
-    ChatMessage,
-  },
-})
+@Component()
 export default class Chat extends Vue {
   get recipientId() {
-    return this.$store.state.chatRecipient ? this.$store.state.chatRecipient.user_id : this.$route.params.id;
+    return this.$route.params.id;
+  }
+
+  get senderId() {
+    return this.$store.state.loggedInUser.user_id;
   }
 
   get chatContent() {
-    return this.$store.state.chatContent[this.recipientId];
+    return this.$store.state.chatContent.filter((message) => {
+      (message.senderId === this.senderId &&
+        message.recipientId === this.recipientId) ||
+        (message.senderId === this.recipientId &&
+          message.recipientId === this.senderId);
+    });
   }
 
   goBack() {
@@ -59,13 +52,9 @@ export default class Chat extends Vue {
   }
 
   userIsSender(message) {
-    const user = this.$store.state.loggedInUser.user_id;
+    const user = this.senderId;
     const sender = message.sender_id;
     return sender === user;
-  }
-
-  destroy()  {
-    this.$store.commit("setChatRecipient", null)
   }
 }
 </script>

@@ -63,7 +63,7 @@
             <i class="material-icons align-middle" aria-hidden="true">mail</i>
             {{ auction.auctionOwner.email }}
           </p>
-          <div class="btn btn-primary" tag="button" @click="goToChat(auction.auctionOwner)">Chat with {{auction.auctionOwner.username}}</div>
+          <div class="btn btn-primary" tag="button" @click="goToChat">Chat with {{auction.auctionOwner.username}}</div>
         </div>
       </div>
     </div>
@@ -131,9 +131,8 @@ export default class Auction extends Vue {
     this.processing = false;
   }
 
-  goToChat(recipient) {
-    this.$store.commit("setChatRecipient", recipient)
-    this.$router.push(`/chat/${recipient.user_id}`);
+  goToChat() {
+    this.$router.push(`/chat/${this.auction.auctionOwner.user_id}`);
   }
 }
 </script>
