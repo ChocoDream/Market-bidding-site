@@ -82,10 +82,8 @@ public class SocketService {
         var socketDto = new SocketDto("newMessage", newMessage);
         var recipient = userService.findById(newMessage.getRecipient_id());
         if (recipient != null) {
-            System.out.println("Recipient:");
-            System.out.println(recipient.getUsername());
             var recipientSession = loggedInSessions.getOrDefault(recipient.getUsername(), null);
-            if (recipientSession != null) {
+            if (recipientSession != null && recipientSession != session) {
                 prepareSendToOne(recipientSession, socketDto);
             }
         }
