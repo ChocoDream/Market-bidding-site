@@ -12,6 +12,8 @@ export default new Vuex.Store({
     auctions: null,
     searchResults: null,
     searchWord: "",
+    chatContent: {},
+    chatRecipient: null,
   },
   mutations: {
     setWebsocket(state, data) {
@@ -43,6 +45,22 @@ export default new Vuex.Store({
     },
     setNewAuction(state, data) {
       state.auctions?.unshift(data);
+    },
+    addNewMessage(state, data) {
+      const chatContent = state.chatContent;
+      const recipientId = data.recipient_id.toString();
+      const key =
+        state.loggedInUser.user_id === recipientId
+          ? data.sender_id.toString()
+          : recipientId;
+      if (!chatContent[recipientId]) {
+        Vue.set(state.chatContent, key, []);
+      }
+      const chat = chatContent[recipientId];
+      Vue.set(chat, chat.length, data);
+    },
+    setChatRecipient(state, data) {
+      state.chatRecipient = data;
     },
   },
   actions: {

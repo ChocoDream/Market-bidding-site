@@ -11,7 +11,11 @@ export const messageHandler = (store, e) => {
       console.log("New Auction: ", data.payload);
       store.commit("setNewAuction", data.payload);
       break;
-
+    case "newMessage": {
+      console.log("New message", data)
+      store.commit("addNewMessage", data.payload)
+      break;
+    }
     default:
       break;
   }

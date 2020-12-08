@@ -25,13 +25,13 @@
 
     <div
       class="chat-message-wrapper"
-      v-for="(content, i) in chatContent"
-      :style="!content.sender ? 'justify-content: flex-end' : ''"
-      :key="content.message + '' + i"
+      v-for="message of chatContent"
+      :style="!userIsSender(message) ? 'justify-content: flex-end' : ''"
+      :key="message.id"
     >
-      <ChatMessage :content="content" />
+      <ChatMessage :userIsSender="!userIsSender(message)" :message="message" />
     </div>
-    <ChatInput />
+    <ChatInput :recipientId="recipientId" />
   </div>
 </template>
 
@@ -46,74 +46,32 @@ import ChatMessage from "../components/chat-page//ChatMessage";
   },
 })
 export default class Chat extends Vue {
+  get recipientId() {
+    return this.$store.state.chatRecipient ? this.$store.state.chatRecipient.user_id : this.$route.params.id;
+  }
+
+  get chatContent() {
+    return this.$store.state.chatContent[this.recipientId];
+  }
+
   goBack() {
     this.$router.go(-1);
   }
 
-//JUST TEST DATA TO HAVE SOMETHING TO USE WHEN STYLING COMPONENTS
-  chatContent = [
-    {
-      message:
-        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: false,
-    },
-    {
-      message:
-        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: false,
-    },
-    {
-      message: "HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: true,
-    },
-    {
-      message:
-        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: true,
-    },
-    {
-      message:
-        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: false,
-    },
-    {
-      message: "HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: true,
-    },
-    {
-      message:
-        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: false,
-    },
-    {
-      message:
-        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: false,
-    },
-    {
-      message: "HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: true,
-    },
-    {
-      message:
-        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: true,
-    },
-    {
-      message:
-        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: false,
-    },
-    {
-      message: "HELLO WORLD HELLO WORLD HELLO WORLD",
-      sender: true,
-    },
-  ];
+  userIsSender(message) {
+    const user = this.$store.state.loggedInUser.user_id;
+    const sender = message.sender_id;
+    return sender === user;
+  }
+
+  destroy()  {
+    this.$store.commit("setChatRecipient", null)
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-.chat-page{
+.chat-page {
   margin-bottom: 20vh;
 }
 
@@ -160,5 +118,4 @@ export default class Chat extends Vue {
   display: flex;
   margin-top: 2%;
 }
-
 </style>

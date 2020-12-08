@@ -1,9 +1,9 @@
 <template>
   <div
     class="chat-container"
-    :class="content.sender ? 'sender-chat' : 'reciever-chat'"
+    :class="userIsSender ? 'sender-chat' : 'reciever-chat'"
   >
-    <p>{{ content.message }}</p>
+    <p>{{ message.content }}</p>
   </div>
 </template>
 
@@ -14,7 +14,12 @@ export default class ChatMessage extends Vue {
   @Prop({
     required: true,
   })
-  content;
+  message;
+
+  @Prop({
+    required: true
+  })
+  userIsSender;
 }
 </script>
 
