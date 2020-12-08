@@ -28,9 +28,9 @@ export default class ChatMessage extends Vue {
   }
 }
 .sender-chat {
-  background-color: #288781;
+  background-color: lightgrey;
 }
 .reciever-chat {
-  background-color: lightgrey;
+  background-color: #288781;
 }
 </style>

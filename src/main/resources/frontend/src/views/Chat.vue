@@ -107,6 +107,28 @@ export default class Chat extends Vue {
     {
       message: "HELLO WORLD HELLO WORLD HELLO WORLD",
       sender: true,
+    },    {
+      message:
+        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: false,
+    },
+    {
+      message: "HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: true,
+    },
+    {
+      message:
+        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: true,
+    },
+    {
+      message:
+        "HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: false,
+    },
+    {
+      message: "HELLO WORLD HELLO WORLD HELLO WORLD",
+      sender: true,
     },
   ];
 }
